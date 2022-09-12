@@ -2,4 +2,4 @@
 
 ## Titre du sous projet
 
-Ceci est un projet GIT d'exemple
+Ceci est un projet GIT d'exemple.
