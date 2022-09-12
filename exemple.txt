@@ -1,1 +1,3 @@
-exemple de texte
+ceci est le premier message.
+
+ceci est le deuxieme message.
