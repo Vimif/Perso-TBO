@@ -7,4 +7,9 @@ autre message qui existe pas sur la brancge distante
 ceci est le quatrième message.
 
 ceci est le sixième message
+<<<<<<< HEAD
 autre message de test
+=======
+
+ceci est le septième message
+>>>>>>> main
