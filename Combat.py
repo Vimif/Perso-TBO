@@ -25,4 +25,40 @@ class Attribut:
 
     def  tkt(self):
         return "ma bite"
+class Combattant:
+    def __init__(self, nom, points_de_vie, degats, attaque_speciale):
+        self.nom = nom
+        self.points_de_vie = points_de_vie
+        self.degats = degats
+        self.attaque_speciale = attaque_speciale
+
+    def attaquer(self, adversaire):
+        adversaire.points_de_vie -= self.degats
+
+    def attaque_speciale(self, adversaire):
+        adversaire.points_de_vie -= self.attaque_speciale
+
+# Création des instances de combattants
+combattant1 = Combattant("Combattant 1", 100, 10, 20)
+combattant2 = Combattant("Combattant 2", 100, 10, 20)
+
+# Boucle de combat
+while combattant1.points_de_vie > 0 and combattant2.points_de_vie > 0:
+    # Combattant 1 attaque Combattant 2
+    combattant1.attaquer(combattant2)
+    print(f"{combattant1.nom} attaque {combattant2.nom}. Points de vie restants de {combattant2.nom}: {combattant2.points_de_vie}")
+    
+    # Vérification si Combattant 2 est toujours en vie
+    if combattant2.points_de_vie <= 0:
+        print(f"{combattant1.nom} a vaincu {combattant2.nom}!")
+        break
+    
+    # Combattant 2 attaque Combattant 1
+    combattant2.attaquer(combattant1)
+    print(f"{combattant2.nom} attaque {combattant1.nom}. Points de vie restants de {combattant1.nom}: {combattant1.points_de_vie}")
+    
+    # Vérification si Combattant 1 est toujours en vie
+    if combattant1.points_de_vie <= 0:
+        print(f"{combattant2.nom} a vaincu {combattant1.nom}!")
+        break
     
