@@ -1,5 +1,0 @@
-2024-04-17 18:56:08,360 [main.py:57 -                 init() ] INFO: Starting with args: {'continuing_project': False, '--external-log-process-port': '8125', '--api-key': '*****', '--api-endpoint': 'https://api.trybricks.ai/api/providers/openai/v1/chat/completions', 'email': 'mail@gmail.com', 'extension_version': '0.1.15', 'user_id': 'c1200c3a-bf95-d7ef-e879-f1cb78c6f6ae', 'workspace': None, 'app_id': '2c8fd52a-76c5-4db6-99b7-ec4047be801c', 'password': '*****', 'step': None}
-2024-04-17 18:56:08,362 [llm_connection.py:421 - stream_gpt_completion() ] INFO: > Request model: gpt-4-turbo-preview
-2024-04-17 18:56:09,324 [llm_connection.py:561 - stream_gpt_completion() ] INFO: <<<<<<<<<< LLM Response <<<<<<<<<<
-START
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
