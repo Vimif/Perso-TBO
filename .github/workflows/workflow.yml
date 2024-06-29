@@ -11,22 +11,22 @@ jobs:
 
     - name: Deploy VM Script
       run: |
-        echo "ESXIHOST: ${{ env.ESXIHOST }}"
-        echo "ESXIUSERNAME: ${{ env.ESXIUSERNAME }}"
-        echo "ESXIPASSWORD: ${{ env.ESXIPASSWORD }}"
-        echo "VMNAME: ${{ env.VMNAME }}"
-        echo "VMDATASTORE: ${{ env.VMDATASTORE }}"
-        echo "FILENAME: ${{ env.FILENAME }}"
-        echo "DISKFORMAT: ${{ env.DISKFORMAT }}"
+        echo "ESXIHOST: ${{ vars.ESXIHOST }}"
+        echo "ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}"
+        echo "ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}"
+        echo "VMNAME: ${{ vars.VMNAMEW }}"
+        echo "VMDATASTORE: ${{ vars.VMDATASTORE }}"
+        echo "FILENAME: ${{ vars.FILENAMEW }}"
         echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
-      env:
-        GITHUB_ESXIHOST: ${{ env.ESXIHOST }}
-        GITHUB_ESXIUSERNAME: ${{ env.ESXIUSERNAME }}
-        GITHUB_ESXIPASSWORD: ${{ env.ESXIPASSWORD }}
-        GITHUB_VMNAME: ${{ env.VMNAMEW }}
-        GITHUB_VMDATASTORE: ${{ env.VMDATASTORE }}
-        GITHUB_FILENAME: ${{ env.FILENAMEW }}
-        GITHUB_DISKFORMAT: ${{ env.DISKFORMAT }}
+        echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
+      # vars:
+      #   GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+      #   GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+      #   GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+      #   GITHUB_VMNAME: ${{ vars.VMNAMEW }}
+      #   GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+      #   GITHUB_FILENAME: ${{ vars.FILENAMEW }}
+      #   GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
       # run: powershell -File Ansible\win\Deploy.ps1
 
   # Import_VM_LN:
