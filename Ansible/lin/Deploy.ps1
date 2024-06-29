@@ -1,13 +1,14 @@
 param (
-    [string]$esxiHost = '192.168.127.128',  # Adresse IP de l'hôte ESXi
-    [string]$esxiUsername = 'root',  # Nom d'utilisateur de l'hôte ESXi
-    [string]$esxiPasswordPlainText = 'Password5*',  # Mot de passe de l'hôte ESXi (en texte brut)
-    [string]$vmName = 'LN1',  # Nom de la machine virtuelle
-    [string]$vmDatastore = 'Datastore1',  # Datastore où la machine virtuelle sera stockée
-    [string]$fileName = 'LN1.ovf',  # Nom du fichier OVF
-    [string]$diskFormat = 'thin',  # Format de disque pour la machine virtuelle
-    [switch]$Force  # Optionnelle pour forcer l'opération
+    [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
+    [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
+    [string]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,  # ESXi host password (plaintext) from GitHub secret/environment variable
+    [string]$vmName = $env:GITHUB_VMNAMEL,  # Name of the virtual machine from GitHub environment variable
+    [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
+    [string]$fileName = $env:GITHUB_FILENAMEL,  # Name of the OVF file from GitHub environment variable
+    [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
+    [switch]$Force  # Optional switch to force the operation
 )
+
 
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
 Write-Log -Message "Debut du processus d'importation de la machine virtuelle..."

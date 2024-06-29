@@ -2,9 +2,9 @@ param (
     [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
     [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
     [string]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,  # ESXi host password (plaintext) from GitHub secret/environment variable
-    [string]$vmName = $env:GITHUB_VMNAME,  # Name of the virtual machine from GitHub environment variable
+    [string]$vmName = $env:GITHUB_VMNAMEW,  # Name of the virtual machine from GitHub environment variable
     [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
-    [string]$fileName = $env:GITHUB_FILENAME,  # Name of the OVF file from GitHub environment variable
+    [string]$fileName = $env:GITHUB_FILENAMEW,  # Name of the OVF file from GitHub environment variable
     [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
     [switch]$Force  # Optional switch to force the operation
 )
