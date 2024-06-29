@@ -1,17 +1,25 @@
-name: CI/CD with GitHub Actions
+name: Deploy VM
 
-on: [workflow_dispatch]
+on: [push]
 
 jobs:
-  Import_VM_WS:
-    runs-on: [self-hosted, windows, x64]
-
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Run deploy.ps1
-      run: powershell -File Ansible\win\Deploy.ps1
+    - name: Deploy VM Script
+      env:
+        GITHUB_ESXIHOST: ${{ env.ESXIHOST }}
+        GITHUB_ESXIUSERNAME: ${{ env.ESXIUSERNAME }}
+        GITHUB_ESXIPASSWORD: ${{ env.ESXIPASSWORD }}
+        GITHUB_VMNAME: ${{ env.VMNAMEW }}
+        GITHUB_VMDATASTORE: ${{ env.VMDATASTORE }}
+        GITHUB_FILENAME: ${{ env.FILENAMEW }}
+        GITHUB_DISKFORMAT: ${{ env.DISKFORMAT }}
+      run: |
+        pwsh -File ./Deploy.ps1
 
   # Import_VM_LN:
   #   runs-on: [self-hosted, windows, x64]

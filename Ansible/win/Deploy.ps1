@@ -1,13 +1,15 @@
 param (
-    [string]$esxiHost = $env:ESXIHOST,  # ESXi host IP address
-    [string]$esxiUsername = $env:ESXIUSERNAME,  # ESXi host username
-    [string]$esxiPasswordPlainText = $env:ESXIPASSWORD,  # ESXi host password (plaintext)
-    [string]$vmName = $env:VMNAMEW,  # Name of the virtual machine
-    [string]$vmDatastore = $env:VMDATASTORE,  # Datastore where the virtual machine will be stored
-    [string]$fileName = $env:FILENAMEW,  # Name of the OVF file
-    [string]$diskFormat = $env:DISKFORMAT,  # Disk format for the virtual machine
+    [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
+    [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
+    [string]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,  # ESXi host password (plaintext) from GitHub secret/environment variable
+    [string]$vmName = $env:GITHUB_VMNAME,  # Name of the virtual machine from GitHub environment variable
+    [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
+    [string]$fileName = $env:GITHUB_FILENAME,  # Name of the OVF file from GitHub environment variable
+    [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
     [switch]$Force  # Optional switch to force the operation
 )
+
+# Rest of the script remains unchanged...
 
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
 Write-Log -Message "Starting the VM import process..."
