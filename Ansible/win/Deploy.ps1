@@ -1,11 +1,11 @@
 param (
-    [string]$esxiHost = '192.168.127.128',  # ESXi host IP address
-    [string]$esxiUsername = 'root',  # ESXi host username
-    [string]$esxiPasswordPlainText = 'Password5*',  # ESXi host password (plaintext)
-    [string]$vmName = 'WS1',  # Name of the virtual machine
-    [string]$vmDatastore = 'Datastore1',  # Datastore where the virtual machine will be stored
-    [string]$fileName = 'WS1.ovf',  # Name of the OVF file
-    [string]$diskFormat = 'thin',  # Disk format for the virtual machine
+    [string]$esxiHost = ${{env.ESXIHOST}},  # ESXi host IP address
+    [string]$esxiUsername = ${{env.ESXIUSERNAME}},  # ESXi host username
+    [string]$esxiPasswordPlainText = ${{env.ESXIPASSWORD}},  # ESXi host password (plaintext)
+    [string]$vmName = ${{env.VMNAMEW}},  # Name of the virtual machine
+    [string]$vmDatastore = ${{env.VMDATASTORE}},  # Datastore where the virtual machine will be stored
+    [string]$fileName = ${{env.FILENAMEW}},  # Name of the OVF file
+    [string]$diskFormat = ${{env.DISKFORMAT}},  # Disk format for the virtual machine
     [switch]$Force  # Optional switch to force the operation
 )
 
