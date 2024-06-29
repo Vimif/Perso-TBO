@@ -10,6 +10,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deploy VM Script
+      run: |
+        echo "ESXIHOST: ${{ vars.ESXIHOST }}"
+        echo "ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}"
+        echo "ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}"
+        echo "VMNAME: ${{ vars.VMNAME }}"
+        echo "VMDATASTORE: ${{ vars.VMDATASTORE }}"
+        echo "FILENAME: ${{ vars.FILENAME }}"
+        echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
       env:
         GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
         GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
