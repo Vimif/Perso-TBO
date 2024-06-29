@@ -1,12 +1,17 @@
-Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
-Import-Module ".\Fonction_Log.psm1"
-write-log -Message "test"
-$vmName
-# Import variables from another script
-. "C:\Users\thoma\Documents\Code\Perso-TBO\Ansible\Deploy.ps1"
-. ".\Fonction_Log.psm1"
+param (
+    [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
+    [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
+    [string]$esxiPassword = $env:GITHUB_ESXIPASSWORD,  # ESXi host password (plaintext) from GitHub secret/environment variable
+    [string]$vmName = $env:GITHUB_VMNAME,  # Name of the virtual machine from GitHub environment variable
+    [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
+    [string]$fileName = $env:GITHUB_FILENAME,  # Name of the OVF file from GitHub environment variable
+    [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
+    [switch]$Force  # Optional switch to force the operation
+)
 
-write-log -Message "test"
-$vmName
-$vmUsername
-$vmPassword
+Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
+Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServer.psm1"
+
+Connect-ESXiServer  -ESXiHost $esxiHost -ESXiUsername $esxiUsername -ESXiPassword $esxiPassword
+
+Write-Log -Message "test"

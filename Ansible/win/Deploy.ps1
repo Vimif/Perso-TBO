@@ -12,6 +12,8 @@ param (
 # Rest of the script remains unchanged...
 
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
+import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServer.psm1"
+
 Write-Log -Message "Starting the VM import process..."
 
 # Convert the password to a SecureString
@@ -56,8 +58,7 @@ function Import-VM {
 
     try {
         Write-Host "Connecting to ESXi/vCenter host..."
-        $esxiCredential = New-Object System.Management.Automation.PSCredential ($esxiUsername, $esxiPassword)
-        Connect-VIServer -Server $esxiHost -Credential $esxiCredential
+        Connect-ESXiServer -Host $esxiHost -Username $esxiUsername -Password $esxiPassword
 
         $existingVM = Get-VM -Name $vmName -ErrorAction SilentlyContinue
         if ($existingVM) {
@@ -86,7 +87,7 @@ function Import-VM {
         Write-Log -Message "An error occurred while importing the VM: $_"
     }
     finally {
-        Disconnect-VIServer -Server $esxiHost -Confirm:$false
+        DisConnect-ESXiServer -Host $esxiHost
     }
 }
 

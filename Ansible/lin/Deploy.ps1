@@ -9,8 +9,9 @@ param (
     [switch]$Force  # Optional switch to force the operation
 )
 
-
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
+import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServer.psm1"
+
 Write-Log -Message "Debut du processus d'importation de la machine virtuelle..."
 
 # Convertir le mot de passe en SecureString
@@ -55,8 +56,7 @@ function Import-VM {
 
     try {
         Write-Host "Connexion à l'hote ESXi/vCenter..."
-        $esxiCredential = New-Object System.Management.Automation.PSCredential ($esxiUsername, $esxiPassword)
-        Connect-VIServer -Server $esxiHost -Credential $esxiCredential
+        Connect-ESXiServer -ESXiHost $esxiHost -ESXiUsername $esxiUsername -ESXiPassword $esxiPassword
 
         $existingVM = Get-VM -Name $vmName -ErrorAction SilentlyContinue
         if ($existingVM) {
@@ -66,7 +66,7 @@ function Import-VM {
             }#>
             Write-Host "Arret et suppression de la machine virtuelle existante..."
             if ($existingVM.PowerState -eq 'PoweredOn'){
-                Write-Host "Arrêt de la machine virtuelle..."
+                Write-Host "Arret de la machine virtuelle..."
                 Stop-VM -VM $existingVM -Confirm:$false
             } else {
                 Write-Host "La machine virtuelle est deja arretee."
@@ -85,7 +85,7 @@ function Import-VM {
         Write-Log -Message "Une erreur s'est produite lors de l'importation de la machine virtuelle : $_"
     }
     finally {
-        Disconnect-VIServer -Server $esxiHost -Confirm:$false
+        DisConnect-ESXiServer -ESXiHost $esxiHost
     }
 }
 
