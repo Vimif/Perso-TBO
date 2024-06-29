@@ -26,7 +26,7 @@ jobs:
         GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
         GITHUB_FILENAME: ${{ vars.FILENAMEW }}
         GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
-      run: powershell -File Ansible\win\Deploy.ps1
+      # run: powershell -File Ansible\win\Deploy.ps1
 
   # Import_VM_LN:
   #   runs-on: [self-hosted, windows, x64]
