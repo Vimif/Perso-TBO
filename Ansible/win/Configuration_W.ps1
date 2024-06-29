@@ -20,9 +20,10 @@ Connect-ESXiServer
 
 $vm = Get-VM -Name $vmName
 $disk = Get-HardDisk -VM $vm | Select-Object -First 1
-$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB | Get-HardDisk -VM $vm| Select-Object -First 1
+$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB
+$disk_config = Get-HardDisk -VM $vm | Select-Object -First 1 | Select-Object -Property CapacityGB
 
-Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($config.CapacityGB)"
+Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($disk_config.CapacityGB)"
 
 if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
     Write-Log -Message "The VM $vmName is good"
