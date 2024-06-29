@@ -9,7 +9,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Deploy VM Script
+    - name: Deploy ${{ vars.VMNAMEW }} Script
       env:
         GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
         GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
@@ -20,12 +20,20 @@ jobs:
         GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
       run: powershell -File Ansible\win\Deploy.ps1
 
-  # Import_VM_LN:
-  #   runs-on: [self-hosted, windows, x64]
+  Import_VM_LN:
+    runs-on: [self-hosted, windows, x64]
 
-  #   steps:
-  #   - name: Checkout repository
-  #     uses: actions/checkout@v2
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-  #   - name: Run deploy.ps1
-  #     run: powershell -File Ansible\lin\Deploy.ps1
+    - name: Deploy ${{ vars.VMNAMEL }} Script
+      env:
+        GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+        GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+        GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+        GITHUB_VMNAME: ${{ vars.VMNAMEL }}
+        GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+        GITHUB_FILENAME: ${{ vars.FILENAMEL }}
+        GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
+      run: powershell -File Ansible\lin\Deploy.ps1
