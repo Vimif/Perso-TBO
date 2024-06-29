@@ -25,7 +25,7 @@ $disk_config = Get-HardDisk -VM $vm | Select-Object -First 1 | Select-Object -Pr
 
 Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($disk_config.CapacityGB)"
 
-if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
+if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory -and $disk_config.CapacityGB -eq $disk) {
     Write-Log -Message "The VM $vmName is good"
 } else {
     Write-Log -Message "The VM $vmName is not good"
