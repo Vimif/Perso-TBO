@@ -10,7 +10,7 @@ param (
 )
 
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
-Write-Log -Message "Début du processus d'importation de la machine virtuelle..."
+Write-Log -Message "Debut du processus d'importation de la machine virtuelle..."
 
 # Convertir le mot de passe en SecureString
 $esxiPassword = ConvertTo-SecureString $esxiPasswordPlainText -AsPlainText -Force
@@ -53,7 +53,7 @@ function Import-VM {
     )
 
     try {
-        Write-Host "Connexion à l'hôte ESXi/vCenter..."
+        Write-Host "Connexion à l'hote ESXi/vCenter..."
         $esxiCredential = New-Object System.Management.Automation.PSCredential ($esxiUsername, $esxiPassword)
         Connect-VIServer -Server $esxiHost -Credential $esxiCredential
 
@@ -63,12 +63,12 @@ function Import-VM {
                 Write-Host "Opération annulée par l'utilisateur."
                 return
             }#>
-            Write-Host "Arrêt et suppression de la machine virtuelle existante..."
+            Write-Host "Arret et suppression de la machine virtuelle existante..."
             if ($existingVM.PowerState -eq 'PoweredOn'){
                 Write-Host "Arrêt de la machine virtuelle..."
                 Stop-VM -VM $existingVM -Confirm:$false
             } else {
-                Write-Host "La machine virtuelle est déjà arrêtée."
+                Write-Host "La machine virtuelle est deja arretee."
             }
             Remove-VM -VM $existingVM -DeleteFromDisk -Confirm:$false
         }
@@ -76,8 +76,8 @@ function Import-VM {
         Write-Host "Importation de la machine virtuelle à partir du fichier OVF..."
         $datastore = Get-Datastore -Name $vmDatastore
         Import-VApp -Source $vmOVFPath -VMHost (Get-VMHost -Name $esxiHost) -Datastore $datastore -Name $vmName -DiskStorageFormat $diskFormat
-        Write-Host "Machine virtuelle '$vmName' importée avec succès."
-        Write-Log -Message "Machine virtuelle '$vmName' importée avec succès."
+        Write-Host "Machine virtuelle '$vmName' importee avec succes."
+        Write-Log -Message "Machine virtuelle '$vmName' importee avec succes."
     }
     catch {
         Write-Host "Une erreur s'est produite lors de l'importation de la machine virtuelle : $_"
@@ -93,8 +93,8 @@ $vmOVFPath = Find-OVFFile -FileName $fileName
 
 if ($null -ne $vmOVFPath) {
     Import-VM -esxiHost $esxiHost -esxiUsername $esxiUsername -esxiPassword $esxiPassword -vmName $vmName -vmOVFPath $vmOVFPath -vmDatastore $vmDatastore -Force:$Force
-    Write-Log -Message "Processus d'importation de la machine virtuelle terminé."
+    Write-Log -Message "Processus d'importation de la machine virtuelle termine."
 } else {
-    Write-Host "Le chemin du fichier OVF n'a pas été défini."
-    Write-Log -Message "Le chemin du fichier OVF n'a pas été défini."
+    Write-Host "Le chemin du fichier OVF n'a pas ete defini."
+    Write-Log -Message "Le chemin du fichier OVF n'a pas ete defini."
 }
