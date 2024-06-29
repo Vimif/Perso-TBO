@@ -11,13 +11,13 @@ jobs:
 
     - name: Deploy VM Script
       env:
-        GITHUB_ESXIHOST: ${{ env.ESXIHOST }}
-        GITHUB_ESXIUSERNAME: ${{ env.ESXIUSERNAME }}
-        GITHUB_ESXIPASSWORD: ${{ env.ESXIPASSWORD }}
-        GITHUB_VMNAME: ${{ env.VMNAMEW }}
-        GITHUB_VMDATASTORE: ${{ env.VMDATASTORE }}
-        GITHUB_FILENAME: ${{ env.FILENAMEW }}
-        GITHUB_DISKFORMAT: ${{ env.DISKFORMAT }}
+        GITHUB_ESXIHOST: ${{ secrets.ESXIHOST }}
+        GITHUB_ESXIUSERNAME: ${{ secrets.ESXIUSERNAME }}
+        GITHUB_ESXIPASSWORD: ${{ secrets.ESXIPASSWORD }}
+        GITHUB_VMNAME: ${{ secrets.VMNAMEW }}
+        GITHUB_VMDATASTORE: ${{ secrets.VMDATASTORE }}
+        GITHUB_FILENAME: ${{ secrets.FILENAMEW }}
+        GITHUB_DISKFORMAT: ${{ secrets.DISKFORMAT }}
       run: |
         pwsh -File ./Deploy.ps1
 
