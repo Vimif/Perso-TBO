@@ -17,7 +17,7 @@ Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServ
 
 Connect-ESXiServer
 
-$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB | Get-HardDisk -VM $vm | Select-Object -First 1
+$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB | Get-HardDisk -VM $vmName | Select-Object -First 1
 Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($config.CapacityGB)"
 
 if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
