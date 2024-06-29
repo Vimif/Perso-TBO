@@ -1,23 +1,21 @@
-# This is a basic workflow that is manually triggered
-
 name: CI/CD with GitHub Actions
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on: [workflow_dispatch]
 
 jobs:
-  # This workflow contains a single job called "greet"
   Import_VM_WS:
-    # The type of runner that the job will run on
     runs-on: [self-hosted, windows, x64]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Runs the deploy.ps1 script
     - name: Run deploy.ps1
-      run: powershell -File Ansible/Deploy.ps1
+      run: powershell -File Ansible\win\Deploy.ps1
+
+  Import_VM_LN:
+    runs-on: [self-hosted, windows, x64]
+
+    steps:
+    - name: Run deploy.ps1
+      run: powershell -File Ansible\lin\Deploy.ps1

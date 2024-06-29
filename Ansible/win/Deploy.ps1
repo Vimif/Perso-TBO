@@ -9,7 +9,7 @@ param (
     [switch]$Force  # Optional switch to force the operation
 )
 
-import-module c:/Users/thoma/Documents/Code/Perso-TBO/Ansible/Fonction_Log.psm1
+import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
 Write-Log -Message "Starting the VM import process..."
 
 # Convert the password to a SecureString
