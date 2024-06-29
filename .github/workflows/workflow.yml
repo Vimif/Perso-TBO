@@ -3,7 +3,7 @@ name: Deploy VM
 on: [workflow_dispatch]
 
 jobs:
-  deploy:
+  Import_VM_WS:
     runs-on: [self-hosted, windows, x64]
     steps:
     - name: Checkout
