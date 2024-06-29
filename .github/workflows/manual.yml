@@ -27,6 +27,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Runs the deploy.ps1 script
+    - name: Run deploy.ps1
+      run: powershell -File deploy.ps1
