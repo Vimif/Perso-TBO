@@ -6,6 +6,8 @@ param (
     [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
     [string]$fileName = $env:GITHUB_FILENAME,  # Name of the OVF file from GitHub environment variable
     [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
+    [string]$cpu = $env:GITHUB_CPU, # Number of CPUs for the virtual machine from GitHub environment variable
+    [string]$Memory = $env:GITHUB_MEMORY, # Amount of memory for the virtual machine from GitHub environment variable
     [switch]$Force  # Optional switch to force the operation
 )
 
@@ -17,8 +19,9 @@ Connect-ESXiServer
 $config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB
 Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB)"
 
-if ($config.NumCPU -eq 4 -and $config.MemoryGB -eq 8) {
+if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
     Write-Log -Message "The VM $vmName is good"
 } else {
     Write-Log -Message "The VM $vmName is not good"
+    set-vm -VM $vmName -NumCPU $cpu -MemoryGB $Memory
 }

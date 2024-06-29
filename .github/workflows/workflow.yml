@@ -54,4 +54,6 @@ jobs:
         GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
         GITHUB_FILENAME: ${{ vars.FILENAMEW }}
         GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
+        GITHUB_CPU: ${{ vars.CPU_W }}
+        GITHUB_MEMORY: ${{ vars.MEMORY_W }}
       run: powershell -File Ansible\win\Configuration_W.ps1
