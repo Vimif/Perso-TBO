@@ -14,7 +14,7 @@ Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServ
 
 Connect-ESXiServer
 
-$config = get-vm -name $vmName | format-list 
+$config = get-vm -name $vmName | format-list -Property NumCPU, MemoryGB
 
 if ($config.NumCPU -eq 4 -and $config.MemoryGB -eq 8) {
     Write-Log -Message "The VM $vmName is good"
