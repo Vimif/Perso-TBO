@@ -58,7 +58,7 @@ function Import-VM {
 
     try {
         Write-Host "Connecting to ESXi/vCenter host..."
-        Connect-ESXiServer -Host $esxiHost -Username $esxiUsername -Password $esxiPassword
+        Connect-ESXiServer
 
         $existingVM = Get-VM -Name $vmName -ErrorAction SilentlyContinue
         if ($existingVM) {

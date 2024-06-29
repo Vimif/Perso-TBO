@@ -7,7 +7,7 @@ function Connect-ESXiServer {
     
     # Validation des paramètres
     if (-not $esxiHost -or -not $esxiUsername -or -not $esxiPassword) {
-        Write-Output "Un ou plusieurs paramètres de connexion sont manquants."
+        Write-Output "Un ou plusieurs parametres de connexion sont manquants."
         return $false
     }
     
@@ -17,10 +17,10 @@ function Connect-ESXiServer {
         
         # Vérifier si la connexion a réussi
         if ($esxiSession) {
-            Write-Output "Connexion au serveur ESXi réussie."
+            Write-Output "Connexion au serveur ESXi reussie."
             return $true
         } else {
-            Write-Output "Échec de la connexion au serveur ESXi."
+            Write-Output "Echec de la connexion au serveur ESXi."
             return $false
         }
     } catch {

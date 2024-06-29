@@ -12,6 +12,14 @@ param (
 Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
 Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServer.psm1"
 
-Connect-ESXiServer 
+Connect-ESXiServer
+
+$config = get-vm -name $vmName | format-list 
+
+if ($config.NumCPU -eq 4 -and $config.MemoryGB -eq 8) {
+    Write-Log -Message "The VM $vmName is good"
+} else {
+    Write-Log -Message "The VM $vmName is not good"
+}
 
 Write-Log -Message "test"
