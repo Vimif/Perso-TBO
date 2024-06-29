@@ -23,5 +23,6 @@ if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
     Write-Log -Message "The VM $vmName is good"
 } else {
     Write-Log -Message "The VM $vmName is not good"
-    set-vm -VM $vmName -NumCPU $cpu -MemoryGB $Memory
+    $vm = Get-VM -Name $vmName
+    set-vm -VM $vm -NumCPU $cpu -MemoryGB $Memory confirm:$false
 }
