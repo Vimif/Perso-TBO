@@ -12,6 +12,6 @@ param (
 Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
 Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServer.psm1"
 
-Connect-ESXiServer  -ESXiHost $esxiHost -ESXiUsername $esxiUsername -ESXiPassword $esxiPassword
+Connect-ESXiServer 
 
 Write-Log -Message "test"
