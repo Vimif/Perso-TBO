@@ -10,24 +10,15 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deploy VM Script
-      run: |
-        echo "ESXIHOST: ${{ vars.ESXIHOST }}"
-        echo "ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}"
-        echo "ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}"
-        echo "VMNAME: ${{ vars.VMNAMEW }}"
-        echo "VMDATASTORE: ${{ vars.VMDATASTORE }}"
-        echo "FILENAME: ${{ vars.FILENAMEW }}"
-        echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
-        echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
-      # vars:
-      #   GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
-      #   GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
-      #   GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
-      #   GITHUB_VMNAME: ${{ vars.VMNAMEW }}
-      #   GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
-      #   GITHUB_FILENAME: ${{ vars.FILENAMEW }}
-      #   GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
-      # run: powershell -File Ansible\win\Deploy.ps1
+      env:
+        GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+        GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+        GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+        GITHUB_VMNAME: ${{ vars.VMNAMEW }}
+        GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+        GITHUB_FILENAME: ${{ vars.FILENAMEW }}
+        GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
+      run: powershell -File Ansible\win\Deploy.ps1
 
   # Import_VM_LN:
   #   runs-on: [self-hosted, windows, x64]
