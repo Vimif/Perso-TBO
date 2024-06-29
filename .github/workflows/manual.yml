@@ -20,4 +20,4 @@ jobs:
 
     # Runs the deploy.ps1 script
     - name: Run deploy.ps1
-      run: powershell -File deploy.ps1
+      run: powershell -File Ansible/Deploy.ps1
