@@ -20,7 +20,7 @@ Connect-ESXiServer
 
 $vm = Get-VM -Name $vmName
 $config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB
-$disk_config = Get-HardDisk -VM $vm | Select-Object -First 1 | Select-Object -Property CapacityGB
+$disk_config = Get-HardDisk -VM $vm | Select-Object -First 1
 
 Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($disk_config.CapacityGB)"
 
@@ -32,5 +32,5 @@ if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory -and $disk_config.
     Write-Log -Message "Updating the VM $vmName configuration..."
 
     set-vm -VM $vm -NumCPU $cpu -MemoryGB $Memory -Confirm:$false
-    Set-HardDisk -HardDisk $disk -CapacityGB $disk -Confirm:$false
+    Set-HardDisk -HardDisk $disk_config -CapacityGB $disk -Confirm:$false
 }
