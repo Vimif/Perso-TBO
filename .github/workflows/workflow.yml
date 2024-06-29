@@ -54,4 +54,4 @@ jobs:
         GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
         GITHUB_FILENAME: ${{ vars.FILENAMEL }}
         GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
-      run: powershell -File Ansible\win\Configurations_W.ps1
+      run: powershell -File Ansible\win\Configuration_W.ps1
