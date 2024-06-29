@@ -18,6 +18,7 @@ jobs:
         echo "VMDATASTORE: ${{ env.VMDATASTORE }}"
         echo "FILENAME: ${{ env.FILENAME }}"
         echo "DISKFORMAT: ${{ env.DISKFORMAT }}"
+        echo "DISKFORMAT: ${{ vars.DISKFORMAT }}"
       env:
         GITHUB_ESXIHOST: ${{ env.ESXIHOST }}
         GITHUB_ESXIUSERNAME: ${{ env.ESXIUSERNAME }}
