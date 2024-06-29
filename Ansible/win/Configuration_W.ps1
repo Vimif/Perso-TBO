@@ -17,16 +17,20 @@ Import-Module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServ
 
 Connect-ESXiServer
 
-$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB | Get-HardDisk -VM $vmName | Select-Object -First 1
+
+$vm = Get-VM -Name $vmName
+$disk = Get-HardDisk -VM $vm | Select-Object -First 1
+$config = Get-VM -Name $vmName | Select-Object -Property NumCPU, MemoryGB | Get-HardDisk -VM $vm| Select-Object -First 1
+
 Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($config.CapacityGB)"
 
 if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory) {
     Write-Log -Message "The VM $vmName is good"
 } else {
     Write-Log -Message "The VM $vmName is not good"
-    $vm = Get-VM -Name $vmName
+
+    Write-Log -Message "Updating the VM $vmName configuration..."
+
     set-vm -VM $vm -NumCPU $cpu -MemoryGB $Memory -Confirm:$false
-    
-    $disk = Get-HardDisk -VM $vm | Select-Object -First 1
     Set-HardDisk -HardDisk $disk -CapacityGB $disk -Confirm:$false
 }
