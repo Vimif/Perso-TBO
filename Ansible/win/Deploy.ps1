@@ -67,7 +67,7 @@ function Import-VM {
         Write-Log -Message "An error occurred while importing the VM: $_"
     }
     finally {
-        DisConnect-ESXiServer -Host $esxiHost
+        Disconnect-ESXiServer -Host $esxiHost
     }
 }
 
