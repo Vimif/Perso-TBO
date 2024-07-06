@@ -1,7 +1,7 @@
 param (
     [string]$esxiHost = $env:GITHUB_ESXIHOST,
     [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,
-    [SecureString]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,
+    [String]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,
     [string]$vmName = $env:GITHUB_VMNAME,
     [string]$vmDatastore = $env:GITHUB_VMDATASTORE,
     [string]$fileName = $env:GITHUB_FILENAME,
@@ -20,16 +20,16 @@ function Find-OVFFile {
     param (
         [string]$FileName
     )
-    $foundOVFPath = $null
-    if (Test-Path -Path "C:\$FileName" -PathType Leaf) {
-        $foundOVFPath = "C:\$FileName"
-        Write-Log -Message "Fichier OVF trouvé : $foundOVFPath"
+    $searchResults = Get-ChildItem -Path C:\ -Filter $FileName -Recurse -ErrorAction Ignore -File
+    if ($searchResults.Count -gt 0) {
+        $foundOVFPath = $searchResults[0].FullName
+        Write-Log -Message "Found OVF file: $foundOVFPath"
+        return $foundOVFPath
     } else {
-        Write-Log -Message "Fichier OVF introuvable."
+        Write-Log -Message "OVF file not found."
+        return $null
     }
-    return $foundOVFPath
 }
-
 function Import-VM {
     param (
         [string]$esxiHost,
