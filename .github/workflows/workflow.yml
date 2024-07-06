@@ -20,7 +20,7 @@ jobs:
           GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
           GITHUB_FILENAME: ${{ vars.FILENAMEW }}
           GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
-        run: powershell -File Ansible\win\Deploy.ps1
+        run: powershell -File Deploy_VM\win\Deploy.ps1
 
   Import_VM_LN:
     runs-on: self-hosted
@@ -37,7 +37,7 @@ jobs:
           GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
           GITHUB_FILENAME: ${{ vars.FILENAMEL }}
           GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
-        run: powershell -File Ansible\lin\Deploy.ps1
+        run: powershell -File Deploy_VM\lin\Deploy.ps1
 
   Test_VM_WS:
     runs-on: self-hosted
@@ -58,7 +58,7 @@ jobs:
           GITHUB_DISK: ${{ vars.DISK_W }}
           GITHUB_CPU: ${{ vars.CPU_W }}
           GITHUB_MEMORY: ${{ vars.MEMORY_W }}
-        run: powershell -File Ansible\win\Configuration_W.ps1
+        run: powershell -File Deploy_VM\win\Configuration_W.ps1
 
   Test_VM_LN:
     runs-on: self-hosted
@@ -76,4 +76,4 @@ jobs:
           GITHUB_DISK: ${{ vars.DISK_L }}
           GITHUB_CPU: ${{ vars.CPU_L }}
           GITHUB_MEMORY: ${{ vars.MEMORY_L }}
-        run: powershell -File Ansible\lin\Configuration_L.ps1
+        run: powershell -File Deploy_VM\lin\Configuration_L.ps1
