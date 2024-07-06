@@ -35,7 +35,7 @@ $diskParams = @{
 
 $disk_config = Get-HardDisk @diskParams
 
-Write-Host "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($disk_config.CapacityGB)"
+Write-Log -Message "NumCPU: $($config.NumCPU), MemoryGB: $($config.MemoryGB), Disk: $($disk_config.CapacityGB)"
 
 if ($config.NumCPU -eq $cpu -and $config.MemoryGB -eq $Memory -and $disk_config.CapacityGB -eq $disk) {
     Write-Log -Message "The VM $vmName is good"

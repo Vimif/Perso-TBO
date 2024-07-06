@@ -23,9 +23,9 @@ function Find-OVFFile {
     $foundOVFPath = $null
     if (Test-Path -Path "C:\$FileName" -PathType Leaf) {
         $foundOVFPath = "C:\$FileName"
-        Write-Host "Fichier OVF trouvé : $foundOVFPath"
+        Write-Log -Message "Fichier OVF trouvé : $foundOVFPath"
     } else {
-        Write-Host "Fichier OVF introuvable."
+        Write-Log -Message "Fichier OVF introuvable."
     }
     return $foundOVFPath
 }
@@ -42,29 +42,27 @@ function Import-VM {
     )
 
     try {
-        Write-Host "Connexion à l'hote ESXi/vCenter..."
+        Write-Log -Message "Connexion à l'hote ESXi/vCenter..."
         Connect-ESXiServer
 
         $existingVM = Get-VM -Name $vmName -ErrorAction SilentlyContinue
         if ($existingVM) {
-            Write-Host "Arret et suppression de la machine virtuelle existante..."
+            Write-Log -Message "Arret et suppression de la machine virtuelle existante..."
             if ($existingVM.PowerState -eq 'PoweredOn') {
-                Write-Host "Arret de la machine virtuelle..."
+                Write-Log -Message "Arret de la machine virtuelle..."
                 Stop-VM -VM $existingVM -Confirm:$false
             } else {
-                Write-Host "La machine virtuelle est deja arretee."
+                Write-Log -Message "La machine virtuelle est deja arretee."
             }
             Remove-VM -VM $existingVM -DeleteFromDisk -Confirm:$false
         }
 
-        Write-Host "Importation de la machine virtuelle à partir du fichier OVF..."
+        Write-Log -Message "Importation de la machine virtuelle à partir du fichier OVF..."
         $datastore = Get-Datastore -Name $vmDatastore
         Import-VApp -Source $vmOVFPath -VMHost (Get-VMHost -Name $esxiHost) -Datastore $datastore -Name $vmName -DiskStorageFormat $diskFormat
-        Write-Host "Machine virtuelle '$vmName' importee avec succes."
         Write-Log -Message "Machine virtuelle '$vmName' importee avec succes."
     }
     catch {
-        Write-Host "Une erreur s'est produite lors de l'importation de la machine virtuelle : $_"
         Write-Log -Message "Une erreur s'est produite lors de l'importation de la machine virtuelle : $_"
     }
     finally {
@@ -87,6 +85,5 @@ if ($null -ne $vmOVFPath) {
     Import-VM @importParams
     Write-Log -Message "Processus d'importation de la machine virtuelle termine."
 } else {
-    Write-Host "Le chemin du fichier OVF n'a pas ete defini."
     Write-Log -Message "Le chemin du fichier OVF n'a pas ete defini."
 }
