@@ -62,7 +62,7 @@ jobs:
 
   Test_VM_LN:
     runs-on: self-hosted
-    needs: Test_VM_LS
+    needs: Import_VM_LN
     steps:
       - name: Deploy VM Script
         env:
