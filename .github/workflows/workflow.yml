@@ -13,13 +13,13 @@ jobs:
 
       - name: Deploy VM Script
         env:
-          GITHUB_ESXIHOST: ${{ secrets.ESXIHOST }}
-          GITHUB_ESXIUSERNAME: ${{ secrets.ESXIUSERNAME }}
-          GITHUB_ESXIPASSWORD: ${{ secrets.ESXIPASSWORD }}
-          GITHUB_VMNAME: ${{ secrets.VMNAMEW }}
-          GITHUB_VMDATASTORE: ${{ secrets.VMDATASTORE }}
-          GITHUB_FILENAME: ${{ secrets.FILENAMEW }}
-          GITHUB_DISKFORMAT: ${{ secrets.DISKFORMAT }}
+          GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+          GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+          GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+          GITHUB_VMNAME: ${{ vars.VMNAMEW }}
+          GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+          GITHUB_FILENAME: ${{ vars.FILENAMEW }}
+          GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
         run: powershell -File Ansible\win\Deploy.ps1
 
   Import_VM_LN:
@@ -30,13 +30,13 @@ jobs:
 
       - name: Deploy VM Script
         env:
-          GITHUB_ESXIHOST: ${{ secrets.ESXIHOST }}
-          GITHUB_ESXIUSERNAME: ${{ secrets.ESXIUSERNAME }}
-          GITHUB_ESXIPASSWORD: ${{ secrets.ESXIPASSWORD }}
-          GITHUB_VMNAME: ${{ secrets.VMNAMEL }}
-          GITHUB_VMDATASTORE: ${{ secrets.VMDATASTORE }}
-          GITHUB_FILENAME: ${{ secrets.FILENAMEL }}
-          GITHUB_DISKFORMAT: ${{ secrets.DISKFORMAT }}
+          GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+          GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+          GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+          GITHUB_VMNAME: ${{ vars.VMNAMEL }}
+          GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+          GITHUB_FILENAME: ${{ vars.FILENAMEL }}
+          GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
         run: powershell -File Ansible\lin\Deploy.ps1
 
   Test_VM_WS:
@@ -48,16 +48,16 @@ jobs:
 
       - name: Deploy VM Script
         env:
-          GITHUB_ESXIHOST: ${{ secrets.ESXIHOST }}
-          GITHUB_ESXIUSERNAME: ${{ secrets.ESXIUSERNAME }}
-          GITHUB_ESXIPASSWORD: ${{ secrets.ESXIPASSWORD }}
-          GITHUB_VMNAME: ${{ secrets.VMNAMEW }}
-          GITHUB_VMDATASTORE: ${{ secrets.VMDATASTORE }}
-          GITHUB_FILENAME: ${{ secrets.FILENAMEW }}
-          GITHUB_DISKFORMAT: ${{ secrets.DISKFORMAT }}
-          GITHUB_DISK: ${{ secrets.DISK_W }}
-          GITHUB_CPU: ${{ secrets.CPU_W }}
-          GITHUB_MEMORY: ${{ secrets.MEMORY_W }}
+          GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+          GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+          GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+          GITHUB_VMNAME: ${{ vars.VMNAMEW }}
+          GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+          GITHUB_FILENAME: ${{ vars.FILENAMEW }}
+          GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
+          GITHUB_DISK: ${{ vars.DISK_W }}
+          GITHUB_CPU: ${{ vars.CPU_W }}
+          GITHUB_MEMORY: ${{ vars.MEMORY_W }}
         run: powershell -File Ansible\win\Configuration_W.ps1
 
   Test_VM_LN:
@@ -66,14 +66,14 @@ jobs:
     steps:
       - name: Deploy VM Script
         env:
-          GITHUB_ESXIHOST: ${{ secrets.ESXIHOST }}
-          GITHUB_ESXIUSERNAME: ${{ secrets.ESXIUSERNAME }}
-          GITHUB_ESXIPASSWORD: ${{ secrets.ESXIPASSWORD }}
-          GITHUB_VMNAME: ${{ secrets.VMNAMEL }}
-          GITHUB_VMDATASTORE: ${{ secrets.VMDATASTORE }}
-          GITHUB_FILENAME: ${{ secrets.FILENAMEL }}
-          GITHUB_DISKFORMAT: ${{ secrets.DISKFORMAT }}
-          GITHUB_DISK: ${{ secrets.DISK_L }}
-          GITHUB_CPU: ${{ secrets.CPU_L }}
-          GITHUB_MEMORY: ${{ secrets.MEMORY_L }}
+          GITHUB_ESXIHOST: ${{ vars.ESXIHOST }}
+          GITHUB_ESXIUSERNAME: ${{ vars.ESXIUSERNAME }}
+          GITHUB_ESXIPASSWORD: ${{ vars.ESXIPASSWORD }}
+          GITHUB_VMNAME: ${{ vars.VMNAMEL }}
+          GITHUB_VMDATASTORE: ${{ vars.VMDATASTORE }}
+          GITHUB_FILENAME: ${{ vars.FILENAMEL }}
+          GITHUB_DISKFORMAT: ${{ vars.DISKFORMAT }}
+          GITHUB_DISK: ${{ vars.DISK_L }}
+          GITHUB_CPU: ${{ vars.CPU_L }}
+          GITHUB_MEMORY: ${{ vars.MEMORY_L }}
         run: powershell -File Ansible\lin\Configuration_L.ps1
