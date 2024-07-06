@@ -1,12 +1,12 @@
 param (
-    [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
-    [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
-    [string]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,  # ESXi host password (plaintext) from GitHub secret/environment variable
-    [string]$vmName = $env:GITHUB_VMNAME,  # Name of the virtual machine from GitHub environment variable
-    [string]$vmDatastore = $env:GITHUB_VMDATASTORE,  # Datastore where the virtual machine will be stored from GitHub environment variable
-    [string]$fileName = $env:GITHUB_FILENAME,  # Name of the OVF file from GitHub environment variable
-    [string]$diskFormat = $env:GITHUB_DISKFORMAT,  # Disk format for the virtual machine from GitHub environment variable
-    [switch]$Force  # Optional switch to force the operation
+    [string]$esxiHost = $env:GITHUB_ESXIHOST,
+    [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,
+    [string]$esxiPasswordPlainText = $env:GITHUB_ESXIPASSWORD,
+    [string]$vmName = $env:GITHUB_VMNAME,
+    [string]$vmDatastore = $env:GITHUB_VMDATASTORE,
+    [string]$fileName = $env:GITHUB_FILENAME,
+    [string]$diskFormat = $env:GITHUB_DISKFORMAT,
+    [switch]$Force
 )
 
 import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Fonction_Log.psm1"
@@ -14,35 +14,22 @@ import-module "C:\Users\thoma\Documents\GitHub\Perso-TBO\module\Connect-ESXiServ
 
 Write-Log -Message "Debut du processus d'importation de la machine virtuelle..."
 
-# Convertir le mot de passe en SecureString
 $esxiPassword = ConvertTo-SecureString $esxiPasswordPlainText -AsPlainText -Force
 
-# Fonction pour confirmer la suppression d'une machine virtuelle existante
-# function Confirm-Deletion {
-#     param (
-#         [string]$vmName
-#     )
-#     $confirmation = Read-Host "La machine virtuelle $vmName existe déjà. Voulez-vous la supprimer ? (O/N)"
-#     return $confirmation -eq 'O'
-# }
-
-# Fonction pour trouver le fichier OVF
 function Find-OVFFile {
     param (
         [string]$FileName
     )
-    $searchResults = Get-ChildItem -Path C:\ -Filter $FileName -Recurse -ErrorAction SilentlyContinue -File
-    if ($searchResults.Count -gt 0) {
-        $foundOVFPath = $searchResults[0].FullName
+    $foundOVFPath = $null
+    if (Test-Path -Path "C:\$FileName" -PathType Leaf) {
+        $foundOVFPath = "C:\$FileName"
         Write-Host "Fichier OVF trouvé : $foundOVFPath"
-        return $foundOVFPath
     } else {
         Write-Host "Fichier OVF introuvable."
-        return $null
     }
+    return $foundOVFPath
 }
 
-# Fonction pour importer la machine virtuelle
 function Import-VM {
     param (
         [string]$esxiHost,
@@ -60,12 +47,8 @@ function Import-VM {
 
         $existingVM = Get-VM -Name $vmName -ErrorAction SilentlyContinue
         if ($existingVM) {
-            <#if (-not $Force -and -not (Confirm-Deletion -vmName $vmName)) {
-                Write-Host "Opération annulée par l'utilisateur."
-                return
-            }#>
             Write-Host "Arret et suppression de la machine virtuelle existante..."
-            if ($existingVM.PowerState -eq 'PoweredOn'){
+            if ($existingVM.PowerState -eq 'PoweredOn') {
                 Write-Host "Arret de la machine virtuelle..."
                 Stop-VM -VM $existingVM -Confirm:$false
             } else {
@@ -89,11 +72,19 @@ function Import-VM {
     }
 }
 
-# Trouver le fichier OVF avant de tenter d'importer la machine virtuelle
 $vmOVFPath = Find-OVFFile -FileName $fileName
 
 if ($null -ne $vmOVFPath) {
-    Import-VM -esxiHost $esxiHost -esxiUsername $esxiUsername -esxiPassword $esxiPassword -vmName $vmName -vmOVFPath $vmOVFPath -vmDatastore $vmDatastore -Force:$Force
+    $importParams = @{
+        esxiHost = $esxiHost
+        esxiUsername = $esxiUsername
+        esxiPassword = $esxiPassword
+        vmName = $vmName
+        vmOVFPath = $vmOVFPath
+        vmDatastore = $vmDatastore
+        Force = $Force
+    }
+    Import-VM @importParams
     Write-Log -Message "Processus d'importation de la machine virtuelle termine."
 } else {
     Write-Host "Le chemin du fichier OVF n'a pas ete defini."
