@@ -1,7 +1,7 @@
 param (
     [string]$esxiHost = $env:GITHUB_ESXIHOST,
     [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,
-    [string]$esxiPassword = $env:GITHUB_ESXIPASSWORD,
+    [SecureString]$esxiPassword = $env:GITHUB_ESXIPASSWORD,
     [string]$vmName = $env:GITHUB_VMNAME,
     [string]$vmDatastore = $env:GITHUB_VMDATASTORE,
     [string]$fileName = $env:GITHUB_FILENAME,

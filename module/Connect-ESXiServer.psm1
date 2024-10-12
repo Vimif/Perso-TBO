@@ -2,7 +2,7 @@ function Connect-ESXiServer {
     param (
         [string]$esxiHost = $env:GITHUB_ESXIHOST,  # ESXi host IP address from GitHub secret/environment variable
         [string]$esxiUsername = $env:GITHUB_ESXIUSERNAME,  # ESXi host username from GitHub secret/environment variable
-        [string]$esxiPassword = $env:GITHUB_ESXIPASSWORD # ESXi host password from GitHub secret/environment variable
+        [SecureString]$esxiPassword = $env:GITHUB_ESXIPASSWORD # ESXi host password from GitHub secret/environment variable
     )
     
     # Validation des paramètres
